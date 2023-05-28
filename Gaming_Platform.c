@@ -4,7 +4,7 @@
 #include<conio.h>
 #include<time.h>
 
-int randomizer,temp,x;
+int randomizer,temp,x,colour;
 
 FILE *fp;
 FILE *fp1;
@@ -17,7 +17,7 @@ int sumplayer;
 int sumcomp;
 int y,z;
 
-const int W,H;
+int W,H;
 
 char p1,p2;
 char name[50];
@@ -71,7 +71,7 @@ int login()
 {
     system("cls");
     printf("\n\n\n\t\t\tSIGN IN");
-    
+
     int i=0;
 
     char holder[100];
@@ -110,8 +110,8 @@ int login()
         }
         while(pass[p-1]!='\r');
     pass[p-1]='\0';
-        printf("\n\n\nLOADING\n");
-        for(i=0;i<=10;i++)
+        printf("\n\n\n\tLOADING\n");
+        for(i=0;i<=20;i++)
         {
             fordelay(100000000);
             printf("%c",220);
@@ -125,7 +125,6 @@ int login()
             c++;
             k=i;
             printf("\n\nYOU HAVE SUCCESSFULLY LOGGED IN\n");
-            overhere:
             break;
         }
 
@@ -135,10 +134,10 @@ int login()
         int s;
         system("cls");
         printf("\nINVALID USERNAME OR PASSWORD");
-        printf("\n1||RELOGIN\n2||SIGNUP");
+        printf("\n1||RELOGIN\n2||SIGNUP\n>");
         scanf("%d",&s);
         printf("\n\n\n\tLOADING\n");
-        for(i=0;i<=10;i++)
+        for(i=0;i<=20;i++)
         {
             fordelay(100000000);
             printf("%c",220);
@@ -178,8 +177,10 @@ int signup()
     if(f==0)
     {
         fp = fopen("loginID.txt", "a");
+        
         fputs(ID,fp);
         fputs("\n",fp);
+        
         fclose(fp);
     }
     else
@@ -259,7 +260,7 @@ int signup()
         goto phone;
     }
         printf("\n\n\nLOADING\n");
-        for(i=0;i<=10;i++)
+        for(i=0;i<=20;i++)
         {
             fordelay(100000000);
             printf("%c",220);
@@ -284,19 +285,29 @@ void edit(void)
     FILE *newrec1;
     FILE *newrec2;
     FILE *newrec3;
+    int i;
+    newrec=fopen("loginID.txt","w");
+    for(i=0;i<10;i++)
+    {
+        if(strlen(a[i].loginID)!=0)
+        {
+            fputs(a[i].loginID,newrec);
+            fputs("\n",newrec);
+        }
+    }
+    fclose(newrec);
     edit1:
      printf("1||Edit Name\n");
      int s;
         printf("2||Edit Ph. No.:\n");
-               printf("3||Edit Password\n");
-               printf("   Edit:");
+               printf("3||Edit Password\n>");
                scanf("%d",&s);
-                 int i;
+
                 int c=0;
                 char login1[50];
 
                printf("\n\n\nLOADING\n");
-                for(i=0;i<=10;i++)
+                for(i=0;i<=20;i++)
                 {
                     fordelay(100000000);
                     printf("%c",220);
@@ -389,8 +400,6 @@ void edit(void)
                             break;
                         }
                 }
-
-
                case 3:
                 {
                    newrec1=fopen("password.txt","w");
@@ -498,7 +507,7 @@ void viewprofile(void)
     printf("\n|YOUR PROFILE|\n");
     printf("\n---------------------------------------\n");
     printf("|NAME\t|PHONE NUMBER\t|LOGIN-ID|\n");
-    printf("|%s\t|%s|%s|",a[k].name,a[k].phno,a[k].loginID);
+    printf("|%s\t|%s\t|%s|",a[k].name,a[k].phno,a[k].loginID);
     printf("\n---------------------------------------\n");
 }
 void viewlist()
@@ -520,7 +529,7 @@ void money()
     system("cls");
     int s;
     qw:
-    printf("1||Withdraw Money From Connected Account\n2||View Balance\n");
+    printf("1||Withdraw Money From Connected Account\n2||View Balance\n>");
     scanf("%d",&s);
     switch(s)
     {
@@ -538,7 +547,7 @@ void money()
                     scanf("%s",&c);
                 }while(strlen(c)!=12);
                 cv:
-            printf("Enter CVV");
+            printf("Enter CVV:\n");
             int p=0;
                     do{
                         cvv[p]=getch();
@@ -579,16 +588,14 @@ void money()
     }
 void buygame(void)
 {
-    system("cls");
     abcdefg:
-    system("cls");
     g1=fopen("rps.txt","r");
     g2=fopen("ttt.txt","r");
     g3=fopen("hc.txt","r");
     g4=fopen("h.txt","r");
     g5=fopen("cgl.txt","r");
-    
-    printf("1|| Rock Paper Scissors\n");
+
+    printf("\n\n\n1|| Rock Paper Scissors\n");
     printf("2|| Tic Tac Toe \n");
     printf("3|| Hand Cricket\n");
     printf("4|| Hangman\n");
@@ -745,6 +752,13 @@ void buygame(void)
 
             if(strcmp(a[k].y,ch)==0)
             {
+                printf("\n\n\n\tLOADING\n");
+                for(i=0;i<=20;i++)
+                {
+                    fordelay(100000000);
+                    printf("%c",220);
+                }
+                system("cls");
                 hc();
                 goto abcdefg;
             }
@@ -804,6 +818,13 @@ void buygame(void)
         {
             if(strcmp(a[k].z,ch)==0)
             {
+                printf("\n\n\n\tLOADING\n");
+                for(i=0;i<=20;i++)
+                {
+                    fordelay(100000000);
+                    printf("%c",220);
+                }
+                system("cls");
                 h();
                 goto abcdefg;
             }
@@ -844,6 +865,7 @@ void buygame(void)
                             fordelay(100000000);
                             printf("%c",220);
                         }
+                        system("cls");
                         h();
                         goto abcdefg;
                     }
@@ -861,9 +883,15 @@ void buygame(void)
         }
     case 5:
         {
-
             if(strcmp(a[k].x,ch)==0)
             {
+                printf("\n\n\n\tLOADING\n");
+                for(i=0;i<=20;i++)
+                {
+                    fordelay(100000000);
+                    printf("%c",220);
+                }
+                system("cls");
                 gol();
                 goto abcdefg;
             }
@@ -880,13 +908,13 @@ void buygame(void)
                         a[k].wallet=a[k].wallet-1200;
                         printf("Remaining Balance: %d",a[k].wallet);
                         fclose(g5);
-                        g5=fopen("x.txt","w");
+                        g5=fopen("cgl.txt","w");
                         char ch1[3]="y";
                         for(i=0;i<10;i++)
                         {
                             if(i==k)
                             {
-
+                                strcpy(a[k].x,ch1);
                                 fputs(ch1,g5);
                                 fputs("\n",g5);
                             }
@@ -904,6 +932,7 @@ void buygame(void)
                             fordelay(100000000);
                             printf("%c",220);
                         }
+                        system("cls");
                         gol();
                         goto abcdefg;
 
@@ -922,15 +951,16 @@ void buygame(void)
         }
         case 6:
         {
-            
+
             printf("\n\n\n\tLOADING\n");
                         for(i=0;i<=20;i++)
                         {
                             fordelay(100000000);
                             printf("%c",220);
                         }
+                        system("cls");
                         break;
-                        
+
         }
         default:
         {
@@ -974,7 +1004,7 @@ int rps() {
         int m=0;
         if(x==y ||lose==(x+1)/2 || win==(x+1)/2)
         {
-            goto kaesrje;
+            goto rpsfunctionk;
         }
         else
         {
@@ -984,14 +1014,14 @@ int rps() {
                r[0]=rand()%4;
                 m=r[0];
 
-            }while(m==0);
+            }
+            while(m==0);
             char s;
             acd:
             printf("\nenter your input");
             printf("\n1||Rock");
             printf("\n2||Scissors");
-            printf("\n3||Paper");
-            printf("\nYour Choice:");
+            printf("\n3||Paper\n>");
             scanf("%d",&n);
             system("cls");
             if(n>3||n<1)
@@ -1054,7 +1084,7 @@ int rps() {
     }
 
 
-   kaesrje:
+   rpsfunctionk:
        printf("\nTotal Computer Wins: %d\n",lose);
        printf("\nYour Total Wins: %d\n",win);
    if(win>lose){
@@ -1184,7 +1214,7 @@ void tttsingle()
   int board[9] = {0, 0, 0, 0, 0, 0, 0, 0, 0};
   printf("Board:\n");
   printf(" 0 | 1 | 2 \n---+---+---\n 3 | 4 | 5 \n---+---+---\n 6 | 7 | 8 \n");
-  printf("Computer: O, You: X\n Would You Like To Go First Or Second ");
+  printf("Computer: O, You: X\n Would You Like To Go First Or Second:\n>");
   int player = 0;
   scanf("%d", &player);
   printf("\n");
@@ -1313,7 +1343,7 @@ int player2()
       char row;
       abcgg:
       printf("\nPlayer 2:");
-      printf("\nEnter Row(A,B,C) and Column(1,2,3):");
+      printf("\nEnter Row(A,B,C) and Column(1,2,3):  ");
       scanf(" %c %c", &row, &column);
       int rowind = row - 'A';
       int colind = column - '1';
@@ -1533,7 +1563,7 @@ printf("               o888o  o88888o 88       `Y8bood8P'               \n");
     qwerty:
     printf("\n1||Singleplayer\n");
     printf("2||Multiplayer\n");
-    printf("3||Exit\n");
+    printf("3||Exit\n>");
     scanf("%d",&f);
     switch(f)
     {
@@ -1736,14 +1766,15 @@ int hc()
     system("cls");
     int i,j;
    y=0;z=0;
-   printf(" ooooo   ooooo                             .o8         .oooooo.             o8o            oooo                      .    \n");
-   printf(" `888'   `888'                             888        d8P'  `Y8b            ` '            `888                    .o8  \n");
-   printf("  888     888   .oooo.   ooo. .oo.    .oooo888       888          oooo d8b oooo   .ooooo.   888  oooo   .ooooo.  .o888oo \n");
-   printf("  888ooooo888  `P  )88b  `888P Y88b  d88' `888       888          `888  8P `888  d88' ` Y8  888 .8P'   d88' `88b   888 \n");
-   printf("  888     888   .oP 888   888   888  888   888       888           888      888  888        888888.    888ooo888   888  \n");
-   printf("  888     888  d8(  888   888   888  888   888       `88b    ooo   888      888  888   .o8  888 `88b.  888    .o   888 . \n");
-   printf(" o888o   o888o `Y888  8o o888o o888o `Y8bod88P        `Y8bood8P'  d888b    o888o `Y8bod8P' o888o o888o `Y8bod8P'    888  \n");
-                                                                                                                                                       
+   printf(" ooooo   ooooo                             .o8         .oooooo.             o8o            oooo                      .     \n");
+   printf(" `888'   `888'                             888        d8P'  `Y8b            ` '            `888                    .o8     \n");
+   printf("  888     888   .oooo.   ooo. .oo.    .oooo888       888          oooo d8b oooo   .ooooo.   888  oooo   .ooooo.  .o888oo   \n");
+   printf("  888ooooo888  `P  )88b  `888P Y88b  d88' `888       888          `888  8P `888  d88' ` Y8  888 .8P'   d88' `88b   888     \n");
+   printf("  888     888   .oP 888   888   888  888   888       888           888      888  888        888888.    888ooo888   888     \n");
+   printf("  888     888  d8(  888   888   888  888   888       `88b    ooo   888      888  888   .o8  888 `88b.  888    .o   888 .   \n");
+   printf(" o888o   o888o `Y888  8o o888o o888o `Y8bod88P        `Y8bood8P'  d888b    o888o `Y8bod8P' o888o o888o `Y8bod8P'    888    \n");
+   printf("\n");
+   
    int r[10];int m;
    do
     {
@@ -1774,7 +1805,7 @@ int hc()
                     {
                         printf("\nComputer choose to bat\n");
                         printf("\n\n\n\tLOADING\n");
-                        for(i=0;i<=30;i++)
+                        for(i=0;i<=20;i++)
                         {
                             fordelay(100000000);
                             printf("%c",220);
@@ -1786,7 +1817,7 @@ int hc()
                     {
                         printf("\nComputer choose to ball\n");
                         printf("\n\n\n\tLOADING\n");
-                        for(i=0;i<=30;i++)
+                        for(i=0;i<=20;i++)
                         {
                             fordelay(100000000);
                             printf("%c",220);
@@ -1801,7 +1832,7 @@ int hc()
                     int a;
                     printf("\nYou Won The Toss\n");
                     amp:
-                    printf("1||Batting\n2||Bowling");
+                    printf("1||Batting\n2||Bowling\n>");
                     scanf("%d",&a);
                     switch(a)
                     {
@@ -1847,7 +1878,7 @@ int hc()
                     {
                         printf("\nComputer Goes On Strike\n");
                         printf("\n\n\n\tLOADING\n");
-                        for(i=0;i<=30;i++)
+                        for(i=0;i<=20;i++)
                         {
                             fordelay(100000000);
                             printf("%c",220);
@@ -1859,7 +1890,7 @@ int hc()
                     {
                         printf("\nComputer is Bowling\n");
                         printf("\n\n\n\tLOADING\n");
-                        for(i=0;i<=30;i++)
+                        for(i=0;i<=20;i++)
                         {
                             fordelay(100000000);
                             printf("%c",220);
@@ -1874,7 +1905,7 @@ int hc()
                     int a;
                     printf("\nYOU WIN THE TOSS\n");
                     acp:
-                    printf("1||Batting\n2||Bowling");
+                    printf("1||Batting\n2||Bowling\n>");
                     scanf("%d",&a);
                     switch(a)
                     {
@@ -1925,6 +1956,7 @@ int hc()
 
 int hangman(int z)
 {
+
     switch(z)
     {
     case 0:
@@ -2131,7 +2163,7 @@ void teamA()
 void teamB()
 {
     char name1[50];
-    printf("word:\n");
+    printf("Word:\n");
     int p=0;
     do{
         name1[p]=getch();
@@ -2156,8 +2188,8 @@ void teamB()
 }
 int h()
 {
-    
-        printf("ooooo   ooooo                                                                          \n");                                                  
+        system("cls");
+        printf("ooooo   ooooo                                                                          \n");
         printf("`888'   `888'                                                                          \n");
         printf(" 888     888   .oooo.   ooo. .oo.    .oooooooo ooo. .oo.  .oo.    .oooo.   ooo. .oo.   \n");
         printf(" 888ooooo888  `P  )88b  `888P Y88b  888' `88b  `888P Y88bP Y88b  `P  )88b  `888P Y88b  \n");
@@ -2166,7 +2198,7 @@ int h()
         printf("o888o   o888o `Y888  8o o888o o888o `8oooooo.  o888o o888o o888o `Y888  8o o888o o888o \n");
         printf("                                    d      YD                                          \n");
         printf("                                    Y88888P'                                           \n");
-    printf("\n\t\t INSTRUCTIONS \n\t\t");
+    printf("\n\t\t INSTRUCTIONS \n");
     printf("\nHANGMAN IS THE GAME WHERE YOU HAVE TO GUESS THE WORD.");
     printf("\nYOU GET 7 INCORRECT GUESSES");
     printf("\n7 POINTS WILL BE AWARDED IF U GUESS THE WORD WITHOUT ANY INCORRECT GUESSES");
@@ -2231,9 +2263,9 @@ void dead(int board[H][W])
 void randomcell(int board[H][W])
 {
     int i, j, num;
-    
-    randomizer = 16 - temp;
-    randomizer = randomizer/2;
+
+    randomizer = 40 - temp;
+    randomizer = randomizer/8;
 
     srand((unsigned)time(NULL));
     for(i =1; i <H -1; i++)
@@ -2246,7 +2278,7 @@ void randomcell(int board[H][W])
         }
 }
 
-void drawarray(int board[H][W],int H, int W)
+void drawarray(int board[H][W])
 {
 int rows;
 int cols;
@@ -2383,6 +2415,7 @@ void start (int board[H][W], int generation)
         break;
 
         case 2:
+        printf("PRESS SPACEBAR TO EXIT\n");
         for (i = 1; (i <= generation) && (c != 32); i++)
     {
         fordelay(500000000);
@@ -2400,24 +2433,21 @@ void start (int board[H][W], int generation)
         break;
         }
     }
-    default:
-    printf("Invalid Input\n");
+    break;
+    
     }
-
-
         if ((check = livecheck(board)) == T)
         {
-            printf ("\nThe Are No More Creatures Alive");
+            printf ("\nAll the cells are dead");
         }
-    
 }
 
 void run(int board[H][W])
 {
     int i, generation, c;
     randomcell(board);
-    drawarray(board,H,W);
-    printf ("\nPlease select a number of generation: ");
+    drawarray(board);
+    printf ("\nPlease select the number of generations: ");
     scanf ("%i", &generation);
     start(board, generation);
 }
@@ -2427,11 +2457,6 @@ int gol()
 
     system("cls");
 
-
-    int board[H][W], mode;
-
-    boarddraw(board);
-    dead(board);
 
     printf ("     .oooooo.                                                                o8o                 .oooooo.                                                          .o88o.      ooooo         o8o   .o88o.\n");
     printf ("    d8P'  `Y8b                                                               `YP                d8P'  `Y8b                                                         888 `       `888'         ` '   888 ` \n");
@@ -2446,13 +2471,21 @@ int gol()
 
     printf("Enter Board Size\nWidth:");
     scanf("%d",&W);
-    printf("Height:");
+    printf("\tHeight:");
     scanf("%d",&H);
-    printf("Manual or Auto (1 or 2)\n");
+    abcdefghijk:
+    printf("Manual or Auto (1 or 2)\n>");
     scanf("%d",&x);
-
+    if(x<0||x>2)
+    {
+        printf("Invalid Input");
+        goto abcdefghijk;
+    }
+    int board[H][W], mode;
+    boarddraw(board);
+    dead(board);
     printf("Cells should spawn in the order of\n");
-    printf("Enter 1 to 10:\n");
+    printf("Enter 1 to 10:\n>");
     scanf("%d",&temp);
 
     run(board);
@@ -2463,7 +2496,7 @@ return 0;
 }
 int main()
 {
-    
+
     fp=fopen("loginID.txt","a");
     fp1=fopen("phonenumber.txt","a");
     fp2=fopen("password.txt","a");
@@ -2475,23 +2508,27 @@ int main()
     g5=fopen("cgl.txt","a");
     system("cls");
     system("color A");
-    printf("  ooooooooo.   oooo                .    .o88o.                                        \n");
-    printf("  `888   `Y88. `888              .o8    888 `                                         \n");
-    printf("   888   .d88'  888   .oooo.   .o888oo o888oo   .ooooo.  oooo d8b  ooo. .oo.  .oo.    \n");
-    printf("   888ooo88P'   888  `P  )88b    888    888    d88' `88b `888  8P `888P  Y88bP Y88    \n");
-    printf("   888          888   .oP 888    888    888    888   888  888      888   888   888    \n");
-    printf("   888          888  d8(  888    888 .  888    888   888  888      888   888   888    \n");
-    printf("  o888o        o888o `Y888^8o    888   o888o   `Y8bod8P' d888b    o888o o888o o888o   \n");
+    printf("\n\n\n\n\n\n");
+    printf("ooooooooo.   oooo                .    .o88o.                                        \n");
+    printf("`888   `Y88. `888              .o8    888 `                                         \n");
+    printf(" 888   .d88'  888   .oooo.   .o888oo o888oo   .ooooo.  oooo d8b  ooo. .oo.  .oo.    \n");
+    printf(" 888ooo88P'   888  `P  )88b    888    888    d88' `88b `888  8P `888P  Y88bP Y88    \n");
+    printf(" 888          888   .oP 888    888    888    888   888  888      888   888   888    \n");
+    printf(" 888          888  d8(  888    888 .  888    888   888  888      888   888   888    \n");
+    printf("o888o        o888o `Y888^8o    888   o888o   `Y8bod8P' d888b    o888o o888o o888o   \n");
     printf("\n\n\n\n");
-    printf("'||%c   /||`                          '||%c   /||`                               \n",92,92);
+    printf("'||%c   /||`                          '||%c   /||`                                 \n",92,92);
     printf(" ||%c%c.//||           ''               ||%c%c.//||                                \n",92,92,92,92);
-    printf(" || %c / ||   '''|.   ||  `||''|,      || %c / ||  .|''|, `||''|,  '||  ||`      \n",92,92);
-    printf(" ||     ||  .|''||   ||   ||  ||      ||     ||  ||..||  ||  ||   ||  ||       \n");
-    printf(".||     ||. `|..||. .||. .||  ||.    .||     ||. `|...  .||  ||.  `|..'|.      \n");
+    printf(" || %c / ||   '''|.   ||  `||''|,      || %c / ||  .|''|, `||''|,  '||  ||`        \n",92,92);
+    printf(" ||     ||  .|''||   ||   ||  ||      ||     ||  ||..||  ||  ||   ||  ||           \n");
+    printf(".||     ||. `|..||. .||. .||  ||.    .||     ||. `|...  .||  ||.  `|..'|.          \n");
     int n,i;
 
     abcd:
-            printf("\n\n\t\t1.TO SIGN UP\n\t\t2.TO LOGIN\n\t\t");
+            printf("\n\n-------------Welcome To The Platform----------------\n");
+            printf("Please Enter\n");
+            printf("\n\n1.TO SIGN UP\n2.TO LOGIN\n>");
+
     scanf("%d",&n);
 
     switch(n)
@@ -2521,19 +2558,90 @@ int main()
 
 
     }
-    
+
     ab:
-    printf("\n1||   EDIT  PROFILE   ||");
-    printf("\n2||   VIEW  PROFILE   ||");
-    printf("\n3|| LIST ALL PROFILES ||");
-    printf("\n4||     CURRENCY      ||");
-    printf("\n5||    GAME LIBRARY   ||");
-    printf("\n6||       EXIT        ||\n");
+    printf("\n1||   CHANGE COLOUR   ||");
+    printf("\n2||   EDIT  PROFILE   ||");
+    printf("\n3||   VIEW  PROFILE   ||");
+    printf("\n4|| LIST ALL PROFILES ||");
+    printf("\n5||     CURRENCY      ||");
+    printf("\n6||    GAME LIBRARY   ||");
+    printf("\n7||       EXIT        ||\n>");
     int s;
     scanf("%d",&s);
     switch(s)
     {
-    case 1:
+        case 1:
+        {
+            system("cls");
+            choicecol:
+            printf("Choose A System Colour:\n");
+            printf("0 > Cancel        8  > Gray\n");
+            printf("1 > Blue          9  > Light Blue\n");
+            printf("2 > Green         10 > Light Green\n");
+            printf("3 > Aqua          11 > Light Aqua\n");
+            printf("4 > Red           12 > Light Red\n");
+            printf("5 > Purple        13 > Light Purple\n");
+            printf("6 > Yellow        14 > Light Yellow\n");
+            printf("7 > White         15 > Bright White\n>");
+            scanf("%d",&colour);
+
+             switch(colour)
+             {
+             case 0:
+             goto ab;
+             case 1:
+             system("color 1");
+             goto ab;
+             case 2:
+             system("color 2");
+             goto ab;
+             case 3:
+             system("color 3");
+             goto ab;
+             case 4:
+             system("color 4");
+             goto ab;
+             case 5:
+             system("color 5");
+             goto ab;
+             case 6:
+             system("color 6");
+             goto ab;
+             case 7:
+             system("color 7");
+             goto ab;
+             case 8:
+             system("color 8");
+             goto ab;
+             case 9:
+             system("color 9");
+             goto ab;
+             case 10:
+             system("color A");
+             goto ab;
+             case 11:
+             system("color B");
+             goto ab;
+             case 12:
+             system("color C");
+             goto ab;
+             case 13:
+             system("color D");
+             goto ab;
+             case 14:
+             system("color E");
+             goto ab;
+             case 15:
+             system("color F");
+             goto ab;
+             default:
+             printf("Invalid Colour\n");
+             goto choicecol;
+             }
+             goto ab;
+        }
+    case 2:
         {
             system("cls");
             printf("\n\n\n\tLOADING\n");
@@ -2546,7 +2654,7 @@ int main()
             goto ab;
             break;
         }
-    case 2:
+    case 3:
         {
             system("cls");
             printf("\n\n\n\tLOADING\n");
@@ -2559,7 +2667,7 @@ int main()
             goto ab;
             break;
         }
-    case 3:
+    case 4:
         {
             system("cls");
             printf("\n\n\n\tLOADING\n");
@@ -2572,7 +2680,7 @@ int main()
             goto ab;
             break;
         }
-    case 4:
+    case 5:
         {
             system("cls");
             printf("\n\n\n\tLOADING\n");
@@ -2585,7 +2693,7 @@ int main()
             goto ab;
             break;
         }
-    case 5:
+    case 6:
         {
             system("cls");
             printf("\n\n\n\tLOADING\n");
@@ -2598,7 +2706,7 @@ int main()
             goto ab;
             break;
         }
-    case 6:
+    case 7:
         {
            printf("\nREMAINING BALANCE:%d",a[k].wallet);
             printf("\nTHIS AMOUNT HAS BEEN SENT TO YOUR ACCOUNT\n");
@@ -2607,7 +2715,7 @@ int main()
             printf("\n\tEXITING\n");
             for(i=0;i<=20;i++)
             {
-                fordelay(100000000);
+                fordelay(500000000);
                 printf("%c",220);
             }
             break;
@@ -2623,6 +2731,3 @@ int main()
     fclose(fp);
     fclose(fp1);
 }
-
-
-
